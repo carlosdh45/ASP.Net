@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="VEHICULOSEntities-Web.config Connection String" description="VEHICULOSEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/entity.Model1.csdl|res://*/entity.Model1.ssdl|res://*/entity.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=vda-2019.database.windows.net;initial catalog=VEHICULOS;persist security info=True;user id=aprende;password=Qwertyop12;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\mahamtr\\source\\repos\\CarlosProyecto\\CarlosProyecto\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='VEHICULOSEntities']/@connectionString" />
+  </parameter>
+</parameters>

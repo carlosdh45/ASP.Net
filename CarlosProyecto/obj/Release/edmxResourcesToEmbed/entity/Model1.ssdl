@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VEHICULOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="t_Auto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoAutomovil" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoCombustible" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cilindraje" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Transmision" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Condiciones" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Atributos" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Localidad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Departamento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Orden">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarroId" Type="int" Nullable="false" />
+    <Property Name="UsuarioId" Type="int" Nullable="false" />
+    <Property Name="LocalizacionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--ERRORs Found During Generation:
+warning 6002: The table/view 'VEHICULOS.dbo.listaordenes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="listaordenes">
+    <Key>
+      <PropertyRef Name="ordenFactura" />
+      <PropertyRef Name="marca" />
+      <PropertyRef Name="modelo" />
+      <PropertyRef Name="atributos" />
+      <PropertyRef Name="motor" />
+      <PropertyRef Name="cliente" />
+      <PropertyRef Name="ciudad" />
+    </Key>
+    <Property Name="ordenFactura" Type="int" Nullable="false" />
+    <Property Name="marca" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="atributos" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="motor" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="cliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--ERRORs Found During Generation:
+warning 6002: The table/view 'VEHICULOS.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__t_Orden__CarroId__35BCFE0A">
+    <End Role="t_Auto" Type="Self.t_Auto" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Auto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="CarroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Orden__Localiz__37A5467C">
+    <End Role="t_Localidad" Type="Self.t_Localidad" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Localidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="LocalizacionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Orden__Usuario__36B12243">
+    <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VEHICULOSModelStoreContainer">
+    <EntitySet Name="t_Auto" EntityType="Self.t_Auto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t_Localidad" EntityType="Self.t_Localidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t_Orden" EntityType="Self.t_Orden" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t_Usuarios" EntityType="Self.t_Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listaordenes" EntityType="Self.listaordenes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [listaordenes].[ordenFactura] AS [ordenFactura], 
+    [listaordenes].[marca] AS [marca], 
+    [listaordenes].[modelo] AS [modelo], 
+    [listaordenes].[atributos] AS [atributos], 
+    [listaordenes].[motor] AS [motor], 
+    [listaordenes].[cliente] AS [cliente], 
+    [listaordenes].[ciudad] AS [ciudad]
+    FROM [dbo].[listaordenes] AS [listaordenes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__t_Orden__CarroId__35BCFE0A" Association="Self.FK__t_Orden__CarroId__35BCFE0A">
+      <End Role="t_Auto" EntitySet="t_Auto" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Orden__Localiz__37A5467C" Association="Self.FK__t_Orden__Localiz__37A5467C">
+      <End Role="t_Localidad" EntitySet="t_Localidad" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Orden__Usuario__36B12243" Association="Self.FK__t_Orden__Usuario__36B12243">
+      <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

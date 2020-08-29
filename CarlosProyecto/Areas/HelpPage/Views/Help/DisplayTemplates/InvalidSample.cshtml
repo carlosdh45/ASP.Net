@@ -1,0 +1,13 @@
+@using CarlosProyecto.Areas.HelpPage
+@model InvalidSample
+
+@if (HttpContext.Current.IsDebuggingEnabled)
+{
+    <div class="warning-message-container">
+        <p>@Model.ERRORMessage</p>
+    </div>
+}
+else
+{
+    <p>Sample not available.</p>
+}

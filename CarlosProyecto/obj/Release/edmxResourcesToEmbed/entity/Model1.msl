@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VEHICULOSModelStoreContainer" CdmEntityContainer="VEHICULOSEntities">
+    <EntitySetMapping Name="t_Auto">
+      <EntityTypeMapping TypeName="VEHICULOSModel.t_Auto">
+        <MappingFragment StoreEntitySet="t_Auto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TipoAutomovil" ColumnName="TipoAutomovil" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="TipoCombustible" ColumnName="TipoCombustible" />
+          <ScalarProperty Name="Cilindraje" ColumnName="Cilindraje" />
+          <ScalarProperty Name="Transmision" ColumnName="Transmision" />
+          <ScalarProperty Name="Condiciones" ColumnName="Condiciones" />
+          <ScalarProperty Name="Atributos" ColumnName="Atributos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Localidad">
+      <EntityTypeMapping TypeName="VEHICULOSModel.t_Localidad">
+        <MappingFragment StoreEntitySet="t_Localidad">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Orden">
+      <EntityTypeMapping TypeName="VEHICULOSModel.t_Orden">
+        <MappingFragment StoreEntitySet="t_Orden">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CarroId" ColumnName="CarroId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="LocalizacionId" ColumnName="LocalizacionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Usuarios">
+      <EntityTypeMapping TypeName="VEHICULOSModel.t_Usuarios">
+        <MappingFragment StoreEntitySet="t_Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listaordenes">
+      <EntityTypeMapping TypeName="VEHICULOSModel.listaordenes">
+        <MappingFragment StoreEntitySet="listaordenes">
+          <ScalarProperty Name="ordenFactura" ColumnName="ordenFactura" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="atributos" ColumnName="atributos" />
+          <ScalarProperty Name="motor" ColumnName="motor" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="VEHICULOSModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

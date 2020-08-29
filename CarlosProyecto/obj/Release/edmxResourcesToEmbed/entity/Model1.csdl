@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VEHICULOSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="t_Auto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoAutomovil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoCombustible" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cilindraje" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Transmision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Condiciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Atributos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_Orden" Relationship="Self.FK__t_Orden__CarroId__35BCFE0A" FromRole="t_Auto" ToRole="t_Orden" />
+  </EntityType>
+  <EntityType Name="t_Localidad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_Orden" Relationship="Self.FK__t_Orden__Localiz__37A5467C" FromRole="t_Localidad" ToRole="t_Orden" />
+  </EntityType>
+  <EntityType Name="t_Orden">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarroId" Type="Int32" Nullable="false" />
+    <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+    <Property Name="LocalizacionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="t_Auto" Relationship="Self.FK__t_Orden__CarroId__35BCFE0A" FromRole="t_Orden" ToRole="t_Auto" />
+    <NavigationProperty Name="t_Localidad" Relationship="Self.FK__t_Orden__Localiz__37A5467C" FromRole="t_Orden" ToRole="t_Localidad" />
+    <NavigationProperty Name="t_Usuarios" Relationship="Self.FK__t_Orden__Usuario__36B12243" FromRole="t_Orden" ToRole="t_Usuarios" />
+  </EntityType>
+  <EntityType Name="t_Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_Orden" Relationship="Self.FK__t_Orden__Usuario__36B12243" FromRole="t_Usuarios" ToRole="t_Orden" />
+  </EntityType>
+  <EntityType Name="listaordenes">
+    <Key>
+      <PropertyRef Name="ordenFactura" />
+      <PropertyRef Name="marca" />
+      <PropertyRef Name="modelo" />
+      <PropertyRef Name="atributos" />
+      <PropertyRef Name="motor" />
+      <PropertyRef Name="cliente" />
+      <PropertyRef Name="ciudad" />
+    </Key>
+    <Property Name="ordenFactura" Type="Int32" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="atributos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="motor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK__t_Orden__CarroId__35BCFE0A">
+    <End Role="t_Auto" Type="Self.t_Auto" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Auto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="CarroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Orden__Localiz__37A5467C">
+    <End Role="t_Localidad" Type="Self.t_Localidad" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Localidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="LocalizacionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__t_Orden__Usuario__36B12243">
+    <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+    <End Role="t_Orden" Type="Self.t_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="t_Orden">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VEHICULOSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="t_Auto" EntityType="Self.t_Auto" />
+    <EntitySet Name="t_Localidad" EntityType="Self.t_Localidad" />
+    <EntitySet Name="t_Orden" EntityType="Self.t_Orden" />
+    <EntitySet Name="t_Usuarios" EntityType="Self.t_Usuarios" />
+    <EntitySet Name="listaordenes" EntityType="Self.listaordenes" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+    <AssociationSet Name="FK__t_Orden__CarroId__35BCFE0A" Association="Self.FK__t_Orden__CarroId__35BCFE0A">
+      <End Role="t_Auto" EntitySet="t_Auto" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Orden__Localiz__37A5467C" Association="Self.FK__t_Orden__Localiz__37A5467C">
+      <End Role="t_Localidad" EntitySet="t_Localidad" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK__t_Orden__Usuario__36B12243" Association="Self.FK__t_Orden__Usuario__36B12243">
+      <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+      <End Role="t_Orden" EntitySet="t_Orden" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
